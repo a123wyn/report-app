@@ -111,6 +111,10 @@ def process_template_with_data(template_content, data, ai_analysis):
         print(f"Template processing error: {e}")
         return f"<h1>Report</h1><p>{ai_analysis}</p>"
 
+@app.route('/health')
+def health_check():
+    return {'status': 'ok'}, 200
+
 @app.route('/')
 @requires_auth
 def index():
