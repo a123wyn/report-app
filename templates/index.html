@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Report Generator - Amazon Q Integration</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f8f9fa; }
+        .container { background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
+        input[type="text"], input[type="file"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; height: 100px; }
+        button { background-color: #ff9900; color: white; padding: 12px 24px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; margin-right: 10px; }
+        button:hover { background-color: #e68900; }
+        .btn-secondary { background-color: #6c757d; }
+        .btn-secondary:hover { background-color: #5a6268; }
+        .alert { padding: 15px; margin: 15px 0; border-radius: 4px; }
+        .alert-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .aws-logo { color: #ff9900; font-weight: bold; }
+        .feature-list { background-color: #f0f8ff; padding: 20px; border-radius: 5px; margin-top: 30px; }
+        .feature-list h3 { color: #0073bb; margin-top: 0; }
+        .feature-list ul { margin: 0; }
+        .feature-list li { margin-bottom: 8px; }
+        .email-section { background-color: #fff3cd; padding: 20px; border-radius: 5px; margin-top: 20px; border: 1px solid #ffeaa7; }
+        .email-section h3 { color: #856404; margin-top: 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI Report Generator</h1>
+            <p class="aws-logo">Powered by Amazon Q & AWS</p>
+        </div>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form action="/generate" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="template_file">🎨 HTML Template File:</label>
+                <input type="file" id="template_file" name="template_file" accept=".html" required>
+                <small style="color: #666;">Upload HTML template with Jinja2 syntax for custom formatting</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="prompt_file">📝 Analysis Instructions (Markdown):</label>
+                <input type="file" id="prompt_file" name="prompt_file" accept=".md" required>
+                <small style="color: #666;">Markdown file with instructions for Amazon Q analysis</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="data_file">📊 Data File (Excel/CSV):</label>
+                <input type="file" id="data_file" name="data_file" accept=".xlsx,.csv" required>
+                <small style="color: #666;">Your data file for AI analysis and report generation</small>
+            </div>
+            
+            <button type="submit">🚀 Generate & Download Report</button>
+        </form>
+        
+        <div class="email-section">
+            <h3>📧 Send Report via Email (Optional)</h3>
+            <p>After generating your report, you can send it to recipients:</p>
+            <form action="/send_email" method="post">
+                <div class="form-group">
+                    <label for="email_list_send">Email Recipients (comma separated):</label>
+                    <textarea id="email_list_send" name="email_list" placeholder="user1@company.com, user2@company.com, manager@company.com"></textarea>
+                </div>
+                <button type="submit" class="btn-secondary">📤 Send Email</button>
+            </form>
+        </div>
+        
+        <div class="feature-list">
+            <h3>🎯 How It Works:</h3>
+            <ul>
+                <li><strong>Step 1:</strong> Upload your files and click "Generate & Download Report"</li>
+                <li><strong>Step 2:</strong> Download the AI-generated PDF report</li>
+                <li><strong>Step 3:</strong> Optionally send the report via email to recipients</li>
+            </ul>
+            
+            <h3>✨ Features:</h3>
+            <ul>
+                <li><strong>Amazon Q Integration:</strong> Uses AWS AI to analyze your data intelligently</li>
+                <li><strong>Custom Templates:</strong> Process HTML templates with your data using Jinja2</li>
+                <li><strong>Smart Analysis:</strong> AI-powered insights, trends, and recommendations</li>
+                <li><strong>PDF Generation:</strong> Professional reports with AI analysis and data tables</li>
+                <li><strong>Email Distribution:</strong> Send reports via Outlook (optional)</li>
+                <li><strong>Multiple Formats:</strong> Supports Excel (.xlsx) and CSV data files</li>
+            </ul>
+            
+            <h3>📁 Sample Files Available:</h3>
+            <ul>
+                <li><code>sample_ai_template.html</code> - Example HTML template</li>
+                <li><code>sample_prompt.md</code> - Example analysis instructions</li>
+                <li><code>sample_data.xlsx</code> - Example data file</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

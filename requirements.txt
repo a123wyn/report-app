@@ -1,0 +1,8 @@
+Flask==2.3.3
+openpyxl==3.1.2
+markdown==3.5.1
+reportlab==4.0.4
+Jinja2==3.1.2
+Werkzeug==2.3.7
+weasyprint==60.2
+beautifulsoup4==4.12.2

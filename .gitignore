@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+venv/
+.env
+uploads/*
+!uploads/.gitkeep
+awscliv2.zip
+aws/
